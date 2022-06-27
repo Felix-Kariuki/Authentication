@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.flexcode.authenticationapp.R
 import com.flexcode.authenticationapp.destinations.LoginScreenDestination
+import com.flexcode.authenticationapp.destinations.RegisterScreenDestination
 import com.flexcode.authenticationapp.ui.theme.ColorBg
 import com.flexcode.authenticationapp.ui.theme.ColorButton
 import com.flexcode.authenticationapp.ui.theme.PurpleBg
@@ -85,7 +86,7 @@ fun WelcomeScreen(
 
             Button(
                 onClick = {
-
+                          navigator.navigate(RegisterScreenDestination)
                 },
                 // Uses ButtonDefaults.ContentPadding by default
                 contentPadding = PaddingValues(
