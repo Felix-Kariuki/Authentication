@@ -3,6 +3,7 @@ package com.flexcode.authenticationapp.data.remote
 import com.flexcode.authenticationapp.data.remote.request.AuthRequest
 import com.flexcode.authenticationapp.data.remote.response.AuthResponse
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface ApiService {
@@ -18,5 +19,7 @@ interface ApiService {
         @Body registerRequest: AuthRequest
     ) : AuthResponse
 
+    @GET("api/user/{id}")
+    suspend fun getUserDetails()
 
 }

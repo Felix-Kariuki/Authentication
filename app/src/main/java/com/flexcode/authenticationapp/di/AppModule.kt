@@ -40,7 +40,7 @@ object AppModule {
     @Singleton
     fun provideAuthPreferences(dataStore: DataStore<Preferences>) =
         AuthPreferences(dataStore)
-    
+
 
     @Provides
     @Singleton
