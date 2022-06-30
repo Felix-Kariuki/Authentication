@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.flexcode.authenticationapp.common.UiEvents
 import com.flexcode.authenticationapp.destinations.LoginScreenDestination
-import com.flexcode.authenticationapp.presentation.login.LoginViewModel
+import com.flexcode.authenticationapp.presentation.AuthViewModel
 import com.flexcode.authenticationapp.ui.theme.PurpleBg
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -36,11 +36,13 @@ import kotlinx.coroutines.flow.collectLatest
 @Composable
 fun RegisterScreen(
     navigator: DestinationsNavigator,
-    viewModel: LoginViewModel = hiltViewModel()
+    viewModel: AuthViewModel = hiltViewModel()
 ) {
     val emailState = viewModel.emailState.value
     val passwordState = viewModel.passwordState.value
-    val loginState = viewModel.loginState.value
+    val firstNameState = viewModel.firstName.value
+    val lastNameState = viewModel.lastName.value
+    val state = viewModel.loginState.value
     val scaffoldState = rememberScaffoldState()
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
 
@@ -76,7 +78,7 @@ fun RegisterScreen(
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            if (loginState.isLoading) {
+            if (state.isLoading) {
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
             }
             Spacer(modifier = Modifier.height(64.dp))
@@ -100,9 +102,9 @@ fun RegisterScreen(
 
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
-                value = emailState.text,
+                value = firstNameState.text,
                 onValueChange = {
-                    viewModel.setEmail(it)
+                    viewModel.setFirstName(it)
                 },
                 placeholder = {
                     Text(text = "First name")
@@ -124,9 +126,9 @@ fun RegisterScreen(
 
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
-                value = emailState.text,
+                value = lastNameState.text,
                 onValueChange = {
-                    viewModel.setEmail(it)
+                    viewModel.setLastName(it)
                 },
                 placeholder = {
                     Text(text = "Last name")
@@ -210,7 +212,7 @@ fun RegisterScreen(
             Spacer(modifier = Modifier.height(8.dp))
             Button(
                 onClick = {
-                    //iewModel.registerUser()
+                    viewModel.registerUser()
                 },
                 shape = RoundedCornerShape(16),
                 colors = ButtonDefaults.buttonColors(

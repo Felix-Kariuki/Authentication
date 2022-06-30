@@ -7,10 +7,10 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStoreFile
 import com.flexcode.authenticationapp.data.local.AuthPreferences
 import com.flexcode.authenticationapp.data.remote.ApiService
-import com.flexcode.authenticationapp.data.repository.LoginRepositoryImpl
-import com.flexcode.authenticationapp.domain.repository.LoginRepository
-import com.flexcode.authenticationapp.domain.use_case.AutoLoginUseCase
+import com.flexcode.authenticationapp.data.repository.AuthRepositoryImpl
+import com.flexcode.authenticationapp.domain.repository.AuthRepository
 import com.flexcode.authenticationapp.domain.use_case.LoginUseCase
+import com.flexcode.authenticationapp.domain.use_case.RegisterUseCase
 import com.flexcode.authenticationapp.util.Constants.AUTH_PREFERENCES
 import com.flexcode.authenticationapp.util.Constants.BASE_URL
 import com.google.gson.Gson
@@ -29,7 +29,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providesPreferenceDataStore(@ApplicationContext context: Context) : DataStore<Preferences> =
+    fun providePreferenceDataStore(@ApplicationContext context: Context) : DataStore<Preferences> =
         PreferenceDataStoreFactory.create(
             produceFile = {
                 context.preferencesDataStoreFile(AUTH_PREFERENCES)
@@ -38,12 +38,9 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideAuthPreferences(dataStore: DataStore<Preferences>, gson: Gson) =
-        AuthPreferences(dataStore, gson)
-
-    @Provides
-    @Singleton
-    fun provideGson() = Gson()
+    fun provideAuthPreferences(dataStore: DataStore<Preferences>) =
+        AuthPreferences(dataStore)
+    
 
     @Provides
     @Singleton
@@ -57,11 +54,11 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideLoginRepository(
+    fun providesAuthRepository(
         apiService: ApiService,
         preferences: AuthPreferences
-    ): LoginRepository {
-        return LoginRepositoryImpl(
+    ): AuthRepository {
+        return AuthRepositoryImpl(
             apiService = apiService,
             preferences = preferences
         )
@@ -69,13 +66,15 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideLoginUseCase(loginRepository: LoginRepository): LoginUseCase {
-        return LoginUseCase(loginRepository)
+    fun providesLoginUseCase(repository: AuthRepository): LoginUseCase {
+        return LoginUseCase(repository)
     }
+
 
     @Provides
     @Singleton
-    fun provideAutoLoginUseCase(loginRepository: LoginRepository): AutoLoginUseCase {
-        return AutoLoginUseCase(loginRepository)
+    fun providesRegisterUseCase(repository: AuthRepository): RegisterUseCase {
+        return RegisterUseCase(repository)
     }
+
 }

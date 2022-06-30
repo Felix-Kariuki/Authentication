@@ -8,18 +8,12 @@ import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class AuthPreferences(
-    private val dataStore: DataStore<Preferences>,
-    private val gson: Gson
-) {
+class AuthPreferences(private val dataStore:DataStore<Preferences>) {
 
-    suspend fun saveLoginToken(loginToken:String){
-        dataStore.edit { pref->
+    suspend fun saveAuthToken(loginToken:String){
+        dataStore.edit { pref ->
             pref[AUTH_KEY] = setOf(loginToken)
         }
     }
 
-    val getLoginToken : Flow<String> = dataStore.data.map { pref->
-        (pref[AUTH_KEY]?: "").toString()
-    }
 }

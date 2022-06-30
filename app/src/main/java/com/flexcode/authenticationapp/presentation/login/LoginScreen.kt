@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.flexcode.authenticationapp.common.UiEvents
 import com.flexcode.authenticationapp.destinations.RegisterScreenDestination
+import com.flexcode.authenticationapp.presentation.AuthViewModel
 import com.flexcode.authenticationapp.ui.theme.PurpleBg
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -35,7 +36,7 @@ import kotlinx.coroutines.flow.collectLatest
 @Composable
 fun LoginScreen(
     navigator: DestinationsNavigator,
-    viewModel: LoginViewModel = hiltViewModel()
+    viewModel: AuthViewModel = hiltViewModel()
 ) {
 
     val emailState = viewModel.emailState.value

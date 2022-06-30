@@ -4,7 +4,7 @@ import com.flexcode.authenticationapp.data.remote.request.AuthRequest
 import com.flexcode.authenticationapp.domain.model.AuthResult
 import com.flexcode.authenticationapp.domain.repository.AuthRepository
 
-class LoginUseCase(
+class RegisterUseCase(
     private val repository: AuthRepository
 ) {
     suspend operator fun invoke(
@@ -27,13 +27,13 @@ class LoginUseCase(
             )
         }
 
-        val loginRequest = AuthRequest(
+        val registerRequest = AuthRequest(
             email = email.trim(),
             password = password.trim()
         )
 
         return AuthResult(
-            result = repository.login(loginRequest)
+            result = repository.register(registerRequest)
         )
     }
 }
