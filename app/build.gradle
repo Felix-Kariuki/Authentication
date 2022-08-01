@@ -78,8 +78,8 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:2.38.1"
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
     kapt 'androidx.hilt:hilt-compiler:1.0.0'
-    implementation 'androidx.hilt:hilt-navigation-compose:1.0.0-beta01'
-    // Navigation made easier
+    implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
+
     implementation 'io.github.raamcosta.compose-destinations:core:1.5.9-beta'
     ksp 'io.github.raamcosta.compose-destinations:ksp:1.5.9-beta'
 
@@ -89,12 +89,12 @@ dependencies {
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    implementation "com.squareup.okhttp3:okhttp:5.0.0-alpha.2"
-    implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2"
+    implementation "com.squareup.okhttp3:okhttp:5.0.0-alpha.3"
+    implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.3"
 
     // Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.3'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.3'
 
     // Datastore
     implementation "androidx.datastore:datastore-preferences:1.0.0"
